@@ -60,19 +60,20 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
   const new_review = req.query.review;
   let book = books[isbn];
   let reviews = book.reviews;
-    if (book) { //Check is friend exists
-        let username = req.body.username; 
-
-        //if DOB the DOB has been changed, update the DOB 
-        if(reviews[username]) {
-            reviews[username] = { username : new_review };
-        } else {
-            reviews.push({username : new_review});
-        }
-        res.send(`Book review updated from ${username}.`);
+  let username = req.body.username;
+  if (book) { //Check is friend exists
+  
+  for (const [key, value] of Object.entries(reviews)) {
+    if (reviews.key === username) {
+        reviews.value = new_review;
+    } else {
+        reviews.push({username : new_review})
+    }
+  }
+        res.send(`Book ${isbn} review updated from ${username}.`);
     }
     else{
-        res.send("Unable to find friend!");
+        res.send("Unable to update/post book review");
     }
   //return res.status(300).json({message: "Yet to be implemented"});
 });
@@ -85,7 +86,7 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
     if (book.reviews[username]) {
         delete book.reviews[username];
     }
-    res.send(`Book with review from ${username} deleted.`);
+    res.send(`Review of book ${isbn} from ${username} deleted.`);
 });
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;

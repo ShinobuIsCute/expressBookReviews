@@ -59,7 +59,7 @@ public_users.get('/author/:author',function (req, res) {
   let filtered_books = [];
   for (const [isbn, data] of Object.entries(books)) {
     if (data.author === author) {
-        filtered_books.push(books[isbn]);
+        filtered_books.push(({"isbn": isbn}), books[isbn]);
     }
   }
   let newPromise = new Promise((resolve, reject) => {
@@ -82,7 +82,7 @@ public_users.get('/title/:title',function (req, res) {
   let filtered_books = [];
   for (const [isbn, data] of Object.entries(books)) {
     if (data.title === title) {
-        filtered_books.push(books[isbn]);
+        filtered_books.push(({"isbn": isbn}), books[isbn]);
     }
   }
   let newPromise = new Promise((resolve, reject) => {
