@@ -57,7 +57,7 @@ regd_users.post("/login", (req,res) => {
 regd_users.put("/auth/review/:isbn", (req, res) => {
   //Write your code here
   const isbn = req.params.isbn;
-  const new_review = req.query.reviews;
+  const new_review = req.query.review;
   let book = books[isbn];
   let reviews = book.reviews;
     if (book) { //Check is friend exists
